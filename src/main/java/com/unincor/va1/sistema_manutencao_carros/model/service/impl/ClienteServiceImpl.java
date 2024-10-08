@@ -1,4 +1,4 @@
-package com.unincor.va1.sistema_manutencao_carros.model.service;
+package com.unincor.va1.sistema_manutencao_carros.model.service.impl;
 
 import java.util.List;
 
@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.unincor.va1.sistema_manutencao_carros.exceptions.ClienteSalvarException;
 import com.unincor.va1.sistema_manutencao_carros.model.domain.Cliente;
 import com.unincor.va1.sistema_manutencao_carros.model.repository.ClienteRepository;
+import com.unincor.va1.sistema_manutencao_carros.model.service.ClienteService;
 
 @Service
 public class ClienteServiceImpl implements ClienteService {

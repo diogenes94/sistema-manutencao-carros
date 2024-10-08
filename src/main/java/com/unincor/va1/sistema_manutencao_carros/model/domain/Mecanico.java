@@ -1,6 +1,5 @@
 package com.unincor.va1.sistema_manutencao_carros.model.domain;
 
-import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -10,11 +9,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -22,25 +19,20 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
+@EqualsAndHashCode(of = "id")
 @Entity
-@Table(name = "carros")
-public class Carro implements Serializable {
+@Table(name = "mecanicos")
+public class Mecanico {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String marca;
-    private String modelo;
-    private Integer ano;
-    private String placa;
-
-    @ManyToOne
-    @JoinColumn(name = "id_cliente")
-    private Cliente cliente;
+    private String nome;
+    private String telefone;
+    private String especialidade;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "carro")
+    @OneToMany(mappedBy = "mecanico")
     private Set<Manutencao> manutencoes = new HashSet<>();
 
 }
