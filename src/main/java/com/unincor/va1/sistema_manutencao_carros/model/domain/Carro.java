@@ -15,7 +15,6 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -43,6 +42,7 @@ public class Carro implements Serializable {
     @NotBlank
     private String placa;
 
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "id_cliente")
     private Cliente cliente;

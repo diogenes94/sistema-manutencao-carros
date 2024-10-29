@@ -12,6 +12,9 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -29,23 +32,29 @@ public class Manutencao {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "id_carro")
     private Carro carro;
 
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "id_mecanico")
     private Mecanico mecanico;
 
+    @NotEmpty
+    @Size(max = 255)
     @Column(name = "descricao_problema")
     private String descricaoProblema;
 
+    @Size(max = 255)
     @Column(name = "descricao_solucao")
     private String descricaoSolucao;
+
     private Double valor;
 
     @Column(name = "status_carro_pronto")
-    private Boolean statusCarroPronto;
+    private Boolean statusCarroPronto = false;
 
     @OneToMany(mappedBy = "manutencao")
     private Set<Comentario> comentarios = new HashSet<>();
