@@ -13,6 +13,8 @@ import com.unincor.va1.sistema_manutencao_carros.exceptions.ClienteSalvarExcepti
 import com.unincor.va1.sistema_manutencao_carros.model.domain.Cliente;
 import com.unincor.va1.sistema_manutencao_carros.model.service.ClienteService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/cliente")
 public class ClienteController {
@@ -21,7 +23,7 @@ public class ClienteController {
     private ClienteService clienteService;
 
     @PostMapping
-    public Cliente salvar(@RequestBody Cliente cliente)
+    public Cliente salvar(@Valid @RequestBody Cliente cliente)
             throws ClienteSalvarException {
         return clienteService.salvar(cliente);
     }
