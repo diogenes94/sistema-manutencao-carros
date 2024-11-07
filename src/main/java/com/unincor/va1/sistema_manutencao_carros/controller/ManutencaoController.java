@@ -46,10 +46,40 @@ public class ManutencaoController {
     public ResponseEntity<Comentario> adicionarComentario(@PathVariable("id") Long id,
             @RequestBody Comentario comentario) {
         var manutencao = manutencaoRepository.findById(id);
-        if(!manutencao.isPresent()) {
+        if (!manutencao.isPresent()) {
             return ResponseEntity.notFound().build();
-        }        
+        }
         comentario.setManutencao(manutencao.get());
         return ResponseEntity.ok().body(comentarioRepository.save(comentario));
     }
+
+    @GetMapping("/{id}/comentario")
+    public ResponseEntity<List<Comentario>> buscarComentarios(
+            @PathVariable("id") Long id) {
+
+        var manutencao = manutencaoRepository.buscarManutencaoComComentario(id);
+        if (manutencao.isPresent()) {
+            List<Comentario> comentarios = manutencao.get()
+                    .getComentarios()
+                    .stream().toList();
+            return ResponseEntity.ok().body(comentarios);
+        }
+
+        return ResponseEntity.notFound().build();
+    }
+
+    @GetMapping("/{id}/comentario/opcao2")
+    public ResponseEntity<List<Comentario>> buscarComentariosOpcao2(
+            @PathVariable("id") Long id) {
+
+        var manutencao = manutencaoRepository.findById(id);
+        if (manutencao.isPresent()) {
+            List<Comentario> comentarios = comentarioRepository
+                    .findByManutencaoOrderById(manutencao.get());
+            return ResponseEntity.ok().body(comentarios);
+        }
+
+        return ResponseEntity.notFound().build();
+    }
+
 }
